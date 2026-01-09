@@ -37,3 +37,4 @@ This project demonstrates a modern data architecture designed to handle high-vel
 By bridging the gap between raw logs and structured data, the system identifies:
 * **User Engagement:** Quantified activity for specific customers (e.g., Alice Smith: 2500+ interactions).
 * **Targeted Insights:** Automated identification of favorite products (e.g., "Hawaiian" vs "Pepperoni") to drive marketing campaigns.
+![Final ETL Results](results.png)
