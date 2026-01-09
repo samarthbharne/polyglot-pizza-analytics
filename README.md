@@ -19,6 +19,19 @@ This project demonstrates a modern data architecture designed to handle high-vel
 3. **Load:** Insights are "Upserted" into PostgreSQL tables using an ACID-compliant connection.
 
 
+## 🧠 Technical Challenges & Solutions
+
+### 1. Schema Impedance Mismatch
+**Challenge:** MongoDB data is unstructured and flexible, while PostgreSQL requires a strict schema.
+**Solution:** Implemented a transformation layer using Python's **Pandas** library to "flatten" the JSON documents and enforce data types (e.g., converting ISO timestamps to SQL-compatible DateTime objects) before loading.
+
+### 2. Idempotency & Data Duplication
+**Challenge:** Running the ETL script multiple times would create duplicate entries for Alice and Bob in the PostgreSQL metrics table.
+**Solution:** Developed an **"Upsert" logic** using the `ON CONFLICT` clause in SQL. This ensures that if a record for a specific user already exists, it is updated with the latest metrics instead of creating a duplicate.
+
+### 3. Distributed Data Integrity
+**Challenge:** Ensuring that a `user_id` in a NoSQL log actually corresponds to a `customer_id` in the Relational DB.
+**Solution:** Integrated a validation step in the Python script to filter out "orphaned" logs that do not match existing customer records, ensuring 100% relational integrity.
 
 ## 📊 Key Results
 By bridging the gap between raw logs and structured data, the system identifies:
